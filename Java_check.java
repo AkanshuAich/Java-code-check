@@ -7,7 +7,7 @@ public class Example {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username:");
         String username = sc.nextLine();
-        System.out.println("Enter your password:");
+        System.out.println("Enter your one liner password:");
         String password = sc.nextLine();
 
         // SECURITY ISSUE: SQL Injection vulnerability
