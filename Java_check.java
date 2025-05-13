@@ -9,25 +9,23 @@ public class Example {
         try (Scanner sc = new Scanner(System.in)) {
     // ... rest of the code that uses sc
 }
-        // // System.out.println("Enter your username:");
+        // System.out.println("Enter your username:");
         String username = sc.nextLine();
-        // // System.out.println("Enter your password:");
+        // System.out.println("Enter your password:");
         String password = sc.nextLine();
 
         // SECURITY ISSUE: SQL Injection vulnerability
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root")) {
     // ... rest of the code that uses conn
 }
-        try (Statement stmt = conn.createStatement()) {
-    // ... rest of the code that uses stmt
-}
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-        try (ResultSet rs = pstmt.executeQuery()) {
+        try (ResultSet rs = stmt.executeQuery(query)) {
     // ... rest of the code that uses rs
 }
 
         if(rs.next())
-        // // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
+        // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
 
         // CODE QUALITY ISSUE: Hardcoded credentials and poor variable naming
         String adminUsername = "admin"; String adminPassword = "admin123"; 
@@ -38,7 +36,7 @@ public class Example {
         }
 
         // SECURITY FLAW: printing sensitive input
-        // // System.out.println("You entered password: " + password);
+        // System.out.println("You entered password: " + password);
 
         // CODE QUALITY + LOGIC ISSUE: Redundant condition and unused method
         if(true || false || false) {
@@ -49,19 +47,19 @@ public class Example {
         int dividend = 10;
         System.out.println("Enter the divisor:");
 int divisor = sc.nextInt(); // no prompt
-        // // if (divisor != 0) {
+        // if (divisor != 0) {
     System.out.println("Result: " + (dividend / divisor));
 } else {
     System.out.println("Cannot divide by zero.");
 } // no check for y == 0
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
-        for(int count=0; count<5; count++){// // System.out.println("Count:"+i);}
+        for(int count=0; count<5; count++){// System.out.println("Count:"+i);}
 
         // LOGICAL ERROR: Infinite loop due to missing condition update
         int loopCounter = 0;
         while(j < 5) {
-            // // System.out.println("Infinite?");
+            // System.out.println("Infinite?");
             // j++; // forgot to increment
         }
 
