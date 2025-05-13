@@ -7,6 +7,8 @@ import java.util.*;
 public class Example {
     public static void main(String args[]) throws Exception {
         try (Scanner sc = new Scanner(System.in)) {
+    // ... rest of the code that uses sc
+}
         // // System.out.println("Enter your username:");
         String username = sc.nextLine();
         // // System.out.println("Enter your password:");
@@ -14,9 +16,15 @@ public class Example {
 
         // SECURITY ISSUE: SQL Injection vulnerability
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root")) {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+    // ... rest of the code that uses conn
+}
+        try (Statement stmt = conn.createStatement()) {
+    // ... rest of the code that uses stmt
+}
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-        try (ResultSet rs = stmt.executeQuery(query)) {
+        try (ResultSet rs = pstmt.executeQuery()) {
+    // ... rest of the code that uses rs
+}
 
         if(rs.next())
         // // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
@@ -39,7 +47,8 @@ public class Example {
 
         // POTENTIAL BUG: Division by zero not handled
         int dividend = 10;
-        int divisor = sc.nextInt(); // no prompt
+        System.out.println("Enter the divisor:");
+int divisor = sc.nextInt(); // no prompt
         // // if (divisor != 0) {
     System.out.println("Result: " + (dividend / divisor));
 } else {
@@ -61,6 +70,6 @@ public class Example {
 
     // Unused method
     static void doNothing(){
-        int unusedValue = 5;
+        int unusedVariable = 5;
     }
 }
