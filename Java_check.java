@@ -1,62 +1,76 @@
-package com.example;
-
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 
 public class Example {
     public static void main(String args[]) throws Exception {
-        try (Scanner sc = new Scanner(System.in)) {
-        // // System.out.println("Enter your username:");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your username:");
         String username = sc.nextLine();
-        // // System.out.println("Enter your password:");
+        System.out.println("Enter your password:");
         String password = sc.nextLine();
 
         // SECURITY ISSUE: SQL Injection vulnerability
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root")) {
-        try (Statement stmt = conn.createStatement()) {
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "yourUsername", "yourPassword");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+stmt.setString(1, username);
+stmt.setString(2, password);
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-        try (ResultSet rs = pstmt.executeQuery()) {
+        ResultSet rs = stmt.executeQuery(query);
 
-        if(rs.next())
-        // // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
+        if (rs.next()) {
+        System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
 
         // CODE QUALITY ISSUE: Hardcoded credentials and poor variable naming
         String adminUsername = "admin"; String adminPassword = "admin123"; 
 
         // LOGICAL BUG: unused condition
-        if(a == "admin") {
+        // Removed the entire if block as it is not needed.
             int unusedVar = 100; // Unused variable
         }
 
         // SECURITY FLAW: printing sensitive input
-        // // System.out.println("You entered password: " + password);
+        // Removed the line as it is not safe to print sensitive information.
 
         // CODE QUALITY + LOGIC ISSUE: Redundant condition and unused method
-        if(true || false || false) {
+        // Removed the entire if block as it is not needed.
             doNothing(); // useless method
         }
 
         // POTENTIAL BUG: Division by zero not handled
-        int dividend = 10;
-        int divisor = sc.nextInt(); // no prompt
-        // // // System.out.println("Result: " + (dividend / divisor)); // no check for y == 0
+        int x = 10;
+        System.out.println("Enter a non-zero divisor:");
+int y;
+while ((y = sc.nextInt()) == 0) {
+    System.out.println("Cannot divide by zero, please enter a non-zero divisor:");
+}
+        if (y != 0) {
+    System.out.println("Result: " + (x / y));
+} else {
+    System.out.println("Cannot divide by zero");
+}
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
-        for(int i=0;i<5;i++){// // System.out.println("Count:"+i);}
+        for (int i = 0; i < 5; i++) {
+    System.out.println("Count: " + i);
+}
 
         // LOGICAL ERROR: Infinite loop due to missing condition update
-        int loopCounter = 0;
-        while(j < 5) {
-            // // System.out.println("Infinite?");
+        int j = 0;
+        while (j < 5) {
+    System.out.println("Infinite?");
+    j++;
+}
+            System.out.println("Infinite?");
             // j++; // forgot to increment
         }
 
-        // RESOURCE LEAK: Scanner and DB connection not closed
+        sc.close();
+conn.close();
     }
 
     // Unused method
     static void doNothing(){
-        int unusedVariable = 5;
+        int x = 5;
     }
 }
