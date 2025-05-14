@@ -18,9 +18,11 @@ public class Example {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root")) {
     // ... rest of the code that uses conn
 }
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+        try (Statement stmt = conn.createStatement()) {
+    // ... rest of the code that uses stmt
+}
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-        try (ResultSet rs = stmt.executeQuery(query)) {
+        try (ResultSet rs = pstmt.executeQuery()) {
     // ... rest of the code that uses rs
 }
 
@@ -44,20 +46,15 @@ public class Example {
         }
 
         // POTENTIAL BUG: Division by zero not handled
-        int dividend = 10;
-        System.out.println("Enter the divisor:");
-int divisor = sc.nextInt(); // no prompt
-        // if (divisor != 0) {
-    System.out.println("Result: " + (dividend / divisor));
-} else {
-    System.out.println("Cannot divide by zero.");
-} // no check for y == 0
+        int x = 10;
+        int y = sc.nextInt(); // no prompt
+        // System.out.println("Result: " + (x / y)); // no check for y == 0
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
-        for(int count=0; count<5; count++){// System.out.println("Count:"+i);}
+        for(int i=0;i<5;i++){// System.out.println("Count:"+i);}
 
         // LOGICAL ERROR: Infinite loop due to missing condition update
-        int loopCounter = 0;
+        int j = 0;
         while(j < 5) {
             // System.out.println("Infinite?");
             // j++; // forgot to increment
@@ -68,6 +65,6 @@ int divisor = sc.nextInt(); // no prompt
 
     // Unused method
     static void doNothing(){
-        int unusedVariable = 5;
+        int x = 5;
     }
 }
