@@ -7,7 +7,7 @@ import java.util.*;
 public class Example {
     public static void main(String args[]) throws Exception {
         try (Scanner sc = new Scanner(System.in)) {
-    // ... rest of the code that uses sc
+    // ... rest of the code that uses sc ...
 }
         // // System.out.println("Enter your username:");
         String username = sc.nextLine();
@@ -16,11 +16,15 @@ public class Example {
 
         // SECURITY ISSUE: SQL Injection vulnerability
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root")) {
-    // ... rest of the code that uses conn
+    // ... rest of the code that uses conn ...
 }
-        // Statement is now created within the try-with-resources block along with the Connection object
+        try (Statement stmt = conn.createStatement()) {
+    // ... rest of the code that uses stmt ...
+}
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
-        // ResultSet is now created within the try-with-resources block along with the PreparedStatement object
+        try (ResultSet rs = pstmt.executeQuery()) {
+    // ... rest of the code that uses rs ...
+}
 
         if(rs.next())
         // // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
@@ -43,16 +47,15 @@ public class Example {
 
         // POTENTIAL BUG: Division by zero not handled
         int dividend = 10;
-        System.out.println("Enter a divisor:");
-int divisor = sc.nextInt(); // no prompt
+        int divisor = sc.nextInt(); // no prompt
         // // if (divisor != 0) {
     System.out.println("Result: " + (dividend / divisor));
 } else {
     System.out.println("Cannot divide by zero.");
-}
+} // no check for y == 0
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
-        for(int i=0;i<5;i++){// // System.out.println("Count:"+i);}
+        for(int i=0;i<5;i++){/*System.out.println("Count:"+i);*/}
 
         // LOGICAL ERROR: Infinite loop due to missing condition update
         int loopCounter = 0;
