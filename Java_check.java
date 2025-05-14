@@ -12,7 +12,9 @@ public class Example {
 
         // SECURITY ISSUE: SQL Injection vulnerability
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "yourUsername", "yourPassword");
-        Statement stmt = conn.createStatement();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+stmt.setString(1, username);
+stmt.setString(2, password);
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
         ResultSet rs = stmt.executeQuery(query);
 
@@ -22,7 +24,8 @@ public class Example {
         System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
 
         // CODE QUALITY ISSUE: Hardcoded credentials and poor variable naming
-        String adminUsername = "admin"; String adminPassword = "admin123"; 
+        String adminUsername = "admin";
+String adminPassword = "admin123"; 
 
         // LOGICAL BUG: unused condition
         // Removed the entire if block as it is not needed.
@@ -30,7 +33,7 @@ public class Example {
         }
 
         // SECURITY FLAW: printing sensitive input
-        // Removed the line as it is not safe to print sensitive information.
+        // Removed the line to avoid printing sensitive information.
 
         // CODE QUALITY + LOGIC ISSUE: Redundant condition and unused method
         // Removed the entire if block as it is not needed.
@@ -44,7 +47,7 @@ public class Example {
     System.out.println("Result: " + (x / y));
 } else {
     System.out.println("Cannot divide by zero");
-}
+} // no check for y == 0
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
         for (int i = 0; i < 5; i++) {
