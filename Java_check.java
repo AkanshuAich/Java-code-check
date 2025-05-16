@@ -47,7 +47,7 @@ public class Example {
 
         // POTENTIAL BUG: Division by zero not handled
         int dividend = 10;
-        System.out.println("Enter a non-zero divisor:");
+        System.out.println("Enter a divisor:");
 int divisor = sc.nextInt(); // no prompt
         // // if (divisor != 0) {
     System.out.println("Result: " + (dividend / divisor));
