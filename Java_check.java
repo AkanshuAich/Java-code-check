@@ -9,9 +9,9 @@ public class Example {
         try (Scanner sc = new Scanner(System.in)) {
     // ... rest of the code that uses sc
 }
-        // // System.out.println("Enter your username:");
+        // System.out.println("Enter your username:");
         String username = sc.nextLine();
-        // // System.out.println("Enter your password:");
+        // System.out.println("Enter your password:");
         String password = sc.nextLine();
 
         // SECURITY ISSUE: SQL Injection vulnerability
@@ -27,10 +27,10 @@ public class Example {
 }
 
         if(rs.next())
-        // // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
+        // System.out.println("Login successful!"); // STYLE VIOLATION: No braces for if statement
 
         // CODE QUALITY ISSUE: Hardcoded credentials and poor variable naming
-        String adminUsername = "admin"; String adminPassword = "admin123"; 
+        String a = "admin"; String b = "admin123"; 
 
         // LOGICAL BUG: unused condition
         if(a == "admin") {
@@ -38,7 +38,7 @@ public class Example {
         }
 
         // SECURITY FLAW: printing sensitive input
-        // // System.out.println("You entered password: " + password);
+        // System.out.println("You entered password: " + password);
 
         // CODE QUALITY + LOGIC ISSUE: Redundant condition and unused method
         if(true || false || false) {
@@ -46,22 +46,17 @@ public class Example {
         }
 
         // POTENTIAL BUG: Division by zero not handled
-        int dividend = 10;
-        System.out.println("Enter a divisor:");
-int divisor = sc.nextInt(); // no prompt
-        // // if (divisor != 0) {
-    System.out.println("Result: " + (dividend / divisor));
-} else {
-    System.out.println("Cannot divide by zero.");
-}
+        int x = 10;
+        int y = sc.nextInt(); // no prompt
+        // System.out.println("Result: " + (x / y)); // no check for y == 0
 
         // STYLE VIOLATION: Bad indentation, inconsistent spacing
-        for(int i=0;i<5;i++){// // System.out.println("Count:"+i);}
+        for(int i=0;i<5;i++){/*System.out.println("Count:"+i);*/}
 
         // LOGICAL ERROR: Infinite loop due to missing condition update
-        int loopCounter = 0;
+        int j = 0;
         while(j < 5) {
-            // // System.out.println("Infinite?");
+            // System.out.println("Infinite?");
             // j++; // forgot to increment
         }
 
@@ -70,6 +65,6 @@ int divisor = sc.nextInt(); // no prompt
 
     // Unused method
     static void doNothing(){
-        int unusedVariable = 5;
+        int x = 5;
     }
 }
